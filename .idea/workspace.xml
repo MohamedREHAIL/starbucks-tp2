@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c7501c68-6cdf-41e4-9cab-369f9c2e5a65" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/app/dev-cart/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dev-cart/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/use-cart.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +44,7 @@
       <option name="presentableId" value="Default" />
       <updated>1695730383191</updated>
       <workItem from="1695730384562" duration="106000" />
-      <workItem from="1695730501213" duration="3032000" />
+      <workItem from="1695730501213" duration="4111000" />
     </task>
     <servers />
   </component>
