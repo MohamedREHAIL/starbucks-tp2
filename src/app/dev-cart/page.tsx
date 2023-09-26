@@ -42,7 +42,7 @@ export default function DevCartPage() {
 
 
                 </section>
-           
+
 
             {/* /Panier */}
         </SectionContainer>
