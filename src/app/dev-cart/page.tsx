@@ -1,6 +1,7 @@
 "use client";
 import { PRODUCTS_CATEGORY_DATA } from "../../../tp-kit/data";
-import { Button, ProductCardLayout, SectionContainer } from "../../../tp-kit/components";
+import { Button, ProductCardLayout, SectionContainer,ProductCartLine } from "../../../tp-kit/components";
+import {Card} from "tp-kit/components";
 const products = PRODUCTS_CATEGORY_DATA[0].products.slice(0, 3);
 
 export default function DevCartPage() {
@@ -22,10 +23,27 @@ export default function DevCartPage() {
             {/* /Produits */}
 
             {/* Panier */}
-            <section className="w-full lg:w-1/3 space-y-8">
 
-                <Button variant={"outline"} fullWidth>Vider le panier</Button>
-            </section>
+                <section className="w-full lg:w-1/3 space-y-8">
+                    <h2>Mon Panier</h2>
+                    {products.map((product)=>(
+                        <>
+                            <ProductCartLine key={product.id} product={product} qty={1} onQtyChange={console.log} ></ProductCartLine>
+
+                        </>
+
+                    ))}
+                    <div className="flex justify-between">
+                        <h3>Total</h3>
+                        <div>14 €</div>
+                    </div>
+                    <Button variant={"primary"} fullWidth>Commander</Button>
+                    <Button variant={"outline"} fullWidth>Vider le panier</Button>
+
+
+                </section>
+           
+
             {/* /Panier */}
         </SectionContainer>
     );
