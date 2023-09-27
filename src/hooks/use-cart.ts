@@ -3,7 +3,7 @@ import {CartData, ProductLineData} from "../types";
 import {set} from "zod";
 import {ProductData} from "tp-kit/types";
 
-const useStore = create<CartData>(function (){
+export const useStore = create<CartData>(function (){
     return {
         lines:[]
     }
@@ -19,17 +19,27 @@ const useStore = create<CartData>(function (){
  * @param product
  */
 export function addLine(product: ProductData) {
-useStore((etat)=>{
-const LigneExistant=etat.lines.find((line)=>line.product.id===product.id);
-if(LigneExistant){
-    LigneExistant.qty+=1
-}
-else{
-    etat.lines.push({product,qty:1})
-}
+// useStore((etat)=>{
+// const LigneExistant=etat.lines.find((line)=>line.product.id===product.id);
+// if(LigneExistant){
+//     LigneExistant.qty+=1
+// }
+// else{
+//     etat.lines.push({product,qty:1})
+// }
+//
+// })
 
-})
-
+    useStore.setState((etat)=>{
+        const LigneExistant=etat.lines.find((line)=>line.product.id===product.id);
+        if(LigneExistant){
+            LigneExistant.qty+=1
+        }
+        else{
+            etat.lines.push({product,qty:1})
+        }
+        return {lines : [...etat.lines]}
+    })
 }
 
 /**

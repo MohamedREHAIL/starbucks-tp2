@@ -2,9 +2,20 @@
 import { PRODUCTS_CATEGORY_DATA } from "../../../tp-kit/data";
 import { Button, ProductCardLayout, SectionContainer,ProductCartLine } from "../../../tp-kit/components";
 import {Card} from "tp-kit/components";
-const products = PRODUCTS_CATEGORY_DATA[0].products.slice(0, 3);
+import {addLine} from "../../hooks/use-cart";
+import {useEffect} from "react";
+import {useStore} from "../../hooks/use-cart";
+
 
 export default function DevCartPage() {
+    const products = PRODUCTS_CATEGORY_DATA[0].products.slice(0, 3);
+    // const { lines } = useStore();
+    const lines = useStore((state) => state.lines)
+
+    useEffect(() => {
+        console.log(lines);
+    }, [lines]);
+
     return (
         <SectionContainer
             className="py-36"
@@ -16,19 +27,23 @@ export default function DevCartPage() {
                     <ProductCardLayout
                         key={product.id}
                         product={product}
-                        button={<Button variant={"ghost"} fullWidth>Ajouter au panier</Button>}
+
+                        button={<Button onClick={()=>addLine(product)} variant={"ghost"} fullWidth>Ajouter au panier</Button>}
                     />
+
                 ))}
             </section>
+            <pre>{JSON.stringify(lines, null, 2)}</pre>
+
             {/* /Produits */}
 
             {/* Panier */}
 
                 <section className="w-full lg:w-1/3 space-y-8">
                     <h2>Mon Panier</h2>
-                    {products.map((product)=>(
+                    {lines.map((product)=>(
                         <>
-                            <ProductCartLine key={product.id} product={product} qty={1} onQtyChange={console.log} ></ProductCartLine>
+                            <ProductCartLine product={product.product} qty={product.qty} onQtyChange={console.log} ></ProductCartLine>
 
                         </>
 
