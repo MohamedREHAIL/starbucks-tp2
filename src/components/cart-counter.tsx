@@ -5,7 +5,7 @@ export function CartCounter(props){
     console.log("rendu counter")
     return(<>
 
-            <h2> Le nombre de ligne est : {count} </h2>
+            <h2>{count}</h2>
 
         </>
     )

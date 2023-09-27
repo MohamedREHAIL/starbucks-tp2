@@ -17,7 +17,7 @@ export function Cart(){
     return(<>
 
 
-            <section className="w-full lg:w-1/3 space-y-8">
+            <section className="w-full space-y-8">
                 <h2>Mon Panier</h2>
                 {lines.map((product)=>(
                     <>
