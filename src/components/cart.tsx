@@ -2,6 +2,7 @@ import {computeCartTotal, removeLine, updateLine, useStore} from "../hooks/use-c
 import {Button, Card} from "tp-kit/components";
 import {ProductCartLine} from "tp-kit/components/products";
 import {useEffect} from "react";
+import {CartCounter} from "./cart-counter";
 
 export function Cart(){
     const lines = useStore((state) => state.lines)
@@ -31,6 +32,7 @@ export function Cart(){
 
 
             </section>
+            <CartCounter lines={lines}></CartCounter>
         </Card>
 
     </>)
