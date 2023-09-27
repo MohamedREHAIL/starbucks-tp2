@@ -48,14 +48,17 @@ export function addLine(product: ProductData) {
  * @param line
  */
 export function updateLine(line: ProductLineData) {
-    useStore((etat)=>{
+
+    useStore.setState((etat)=>{
         const ligneExistant=etat.lines.find((l)=>l.product.id===line.product.id);
         if(ligneExistant){
             ligneExistant.qty=line.qty
         }
-        
-        
+
+        return {lines : [...etat.lines]}
     })
+
+
 }
 
 /**
@@ -65,9 +68,15 @@ export function updateLine(line: ProductLineData) {
  * @returns
  */
 export function removeLine(productId: number) {
-    useStore((etat)=>{
+    // useStore((etat)=>{
+    //     etat.lines=etat.lines.filter((line)=>line.product.id!=productId)
+    // })
+    useStore.setState((etat)=>{
         etat.lines=etat.lines.filter((line)=>line.product.id!=productId)
+
+        return {lines : [...etat.lines]}
     })
+
 }
 
 /**

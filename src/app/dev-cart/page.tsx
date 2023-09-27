@@ -2,7 +2,7 @@
 import { PRODUCTS_CATEGORY_DATA } from "../../../tp-kit/data";
 import { Button, ProductCardLayout, SectionContainer,ProductCartLine } from "../../../tp-kit/components";
 import {Card} from "tp-kit/components";
-import {addLine} from "../../hooks/use-cart";
+import {addLine, computeCartTotal, computeLineSubTotal, removeLine, updateLine} from "../../hooks/use-cart";
 import {useEffect} from "react";
 import {useStore} from "../../hooks/use-cart";
 
@@ -33,7 +33,7 @@ export default function DevCartPage() {
 
                 ))}
             </section>
-            <pre>{JSON.stringify(lines, null, 2)}</pre>
+            {/*<pre>{JSON.stringify(lines, null, 2)}</pre>*/}
 
             {/* /Produits */}
 
@@ -43,14 +43,14 @@ export default function DevCartPage() {
                     <h2>Mon Panier</h2>
                     {lines.map((product)=>(
                         <>
-                            <ProductCartLine product={product.product} qty={product.qty} onQtyChange={console.log} ></ProductCartLine>
+                            <ProductCartLine key={product.product.id} product={product.product} qty={product.qty} onQtyChange={(qty)=>updateLine({...product, qty})} onDelete={()=>removeLine(product.product.id)} ></ProductCartLine>
 
                         </>
 
                     ))}
                     <div className="flex justify-between">
                         <h3>Total</h3>
-                        <div>14 €</div>
+                        <div>{computeCartTotal(lines.map(p=>p))}</div>
                     </div>
                     <Button variant={"primary"} fullWidth>Commander</Button>
                     <Button variant={"outline"} fullWidth>Vider le panier</Button>
