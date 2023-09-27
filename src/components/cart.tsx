@@ -4,8 +4,11 @@ import {ProductCartLine} from "tp-kit/components/products";
 import {useEffect} from "react";
 import {CartCounter} from "./cart-counter";
 
+
 export function Cart(){
+
     const lines = useStore((state) => state.lines)
+
 
     useEffect(() => {
         console.log(lines);
@@ -13,7 +16,7 @@ export function Cart(){
 
     return(<>
 
-        <Card>
+
             <section className="w-full lg:w-1/3 space-y-8">
                 <h2>Mon Panier</h2>
                 {lines.map((product)=>(
@@ -32,8 +35,8 @@ export function Cart(){
 
 
             </section>
-            <CartCounter lines={lines}></CartCounter>
-        </Card>
+
+
 
     </>)
 }

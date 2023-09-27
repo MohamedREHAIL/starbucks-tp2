@@ -5,7 +5,8 @@ import {ProductData} from "tp-kit/types";
 
 export const useStore = create<CartData>(function (){
     return {
-        lines:[]
+        lines:[],
+        count:0
     }
 
 })
@@ -19,16 +20,7 @@ export const useStore = create<CartData>(function (){
  * @param product
  */
 export function addLine(product: ProductData) {
-// useStore((etat)=>{
-// const LigneExistant=etat.lines.find((line)=>line.product.id===product.id);
-// if(LigneExistant){
-//     LigneExistant.qty+=1
-// }
-// else{
-//     etat.lines.push({product,qty:1})
-// }
-//
-// })
+
 
     useStore.setState((etat)=>{
         const LigneExistant=etat.lines.find((line)=>line.product.id===product.id);
@@ -37,8 +29,9 @@ export function addLine(product: ProductData) {
         }
         else{
             etat.lines.push({product,qty:1})
+            etat.count+=1
         }
-        return {lines : [...etat.lines]}
+        return {lines : [...etat.lines],count:etat.count}
     })
 }
 
@@ -73,8 +66,9 @@ export function removeLine(productId: number) {
     // })
     useStore.setState((etat)=>{
         etat.lines=etat.lines.filter((line)=>line.product.id!=productId)
+        etat.count-=1
 
-        return {lines : [...etat.lines]}
+        return {lines : [...etat.lines],count:etat.count}
     })
 
 }

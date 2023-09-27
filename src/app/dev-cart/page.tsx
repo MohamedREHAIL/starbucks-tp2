@@ -6,6 +6,7 @@ import {addLine, computeCartTotal, computeLineSubTotal, removeLine, updateLine} 
 import {useEffect} from "react";
 import {Cart} from "../../components/cart";
 import {useStore} from "../../hooks/use-cart";
+import {CartCounter} from "../../components/cart-counter";
 
 
 export default function DevCartPage() {
@@ -35,6 +36,7 @@ export default function DevCartPage() {
 
             {/* Panier */}
             <Cart></Cart>
+            <CartCounter></CartCounter>
             {/* /Panier */}
         </SectionContainer>
     );
