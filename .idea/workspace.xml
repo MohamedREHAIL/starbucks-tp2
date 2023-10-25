@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c7501c68-6cdf-41e4-9cab-369f9c2e5a65" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/prisma/seed.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[categorySlug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[categorySlug]/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +45,7 @@
       <workItem from="1695730501213" duration="4111000" />
       <workItem from="1695802355323" duration="15136000" />
       <workItem from="1698234150094" duration="2224000" />
-      <workItem from="1698236397128" duration="5910000" />
+      <workItem from="1698236397128" duration="6505000" />
     </task>
     <servers />
   </component>
