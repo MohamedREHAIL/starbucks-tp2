@@ -4,7 +4,7 @@ import { PRODUCTS_CATEGORY_DATA } from "tp-kit/data"
 const prisma = new PrismaClient()
 
 const datas = PRODUCTS_CATEGORY_DATA
-const datass=PRODUCTS_CATEGORY_DATA[0]
+
 
 async function main() {
     
