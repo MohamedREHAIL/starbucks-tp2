@@ -1,6 +1,9 @@
 {
   "name": "starbucks-tp",
   "version": "0.1.0",
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "private": true,
   "workspaces": [
     "tp-kit"
@@ -28,6 +31,7 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
-    "prisma": "^5.5.0"
+    "prisma": "^5.5.0",
+    "ts-node": "^10.9.1"
   }
 }
