@@ -3,6 +3,9 @@ import { PRODUCTS_CATEGORY_DATA } from "tp-kit/data";
 import { ProductList } from "../../components/product-list";
 import { NextPageProps } from "../../types";
 import { Metadata } from "next";
+import { cache } from 'react'
+import { notFound } from 'next/navigation'
+
 import prisma from "../../utils/prisma";
 const category = PRODUCTS_CATEGORY_DATA[0];
 
@@ -11,27 +14,43 @@ type Props = {
   categorySlug: string;
 };
 
-  async function getCategory() {
+
+
+
+export const getCategory = cache(async (x: string) => {
+  console.log("getCategory")
   const categorie = await prisma.productCategory.findFirst({
-
-    include:{
-      products:true
+    where: {
+      slug: x
+    },
+    include: {
+      products: true
     }
-  })
-  return categorie
-}
+  });
+  return categorie;
 
-export async function generateMetadata({ params, searchParams} : NextPageProps<Props>) : Promise<Metadata> {
-  {console.log("ddddd")}
-  // const category = await getCategory
-  return {
-    title: category.name,
-    description: `Trouvez votre inspiration avec un vaste choix de boissons Starbucks parmi nos produits ${category.name}`
+})
+
+
+
+
+export async function generateMetadata({ params, searchParams }: NextPageProps<Props>): Promise<Metadata> {
+  const result = await getCategory(params.categorySlug);
+
+  if (!result) {
+    return notFound()
   }
+
+  return {
+    title: result.name,
+    description: `Trouvez votre inspiration avec un vaste choix de boissons Starbucks parmi nos produits ${result.name}`
+  };
 }
 
 export default async function CategoryPage({params}: NextPageProps<Props>) {
-  {console.log("ddddd")}
+ 
+  const result = await getCategory(params.categorySlug);
+  
   return <SectionContainer>
    
     <BreadCrumbs 
@@ -41,12 +60,12 @@ export default async function CategoryPage({params}: NextPageProps<Props>) {
           url: "/"
         },
         {
-          label: category.name,
-          url: `/${category.slug}`
+          label: result?.name,
+          url: `/${result?.slug}`
         }
       ]}
     />
 
-    <ProductList categories={[category]} />
+    <ProductList categories={[result]} />
   </SectionContainer>
 }
