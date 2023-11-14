@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7501c68-6cdf-41e4-9cab-369f9c2e5a65" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/add-to-cart-button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/api/product-filters/route.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/[categorySlug]/[productSlug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[categorySlug]/[productSlug]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/product-list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product-list.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +46,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mr553679\Desktop\tpStarV2\starbucks-tp2\src\app" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -60,7 +64,7 @@
       <workItem from="1695802355323" duration="15136000" />
       <workItem from="1698234150094" duration="2224000" />
       <workItem from="1698236397128" duration="6505000" />
-      <workItem from="1699964574756" duration="4467000" />
+      <workItem from="1699964574756" duration="14500000" />
     </task>
     <servers />
   </component>

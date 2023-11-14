@@ -1,5 +1,5 @@
 "use client";
-import { FC, memo, useMemo, useState } from "react";
+import {FC, memo, useEffect, useMemo, useState} from "react";
 import { ProductFilters } from "./product-filters";
 import { ProductsCategoryData } from "tp-kit/types";
 import { Button, ProductCardLayout, ProductGridLayout } from "tp-kit/components";
@@ -7,6 +7,7 @@ import { ProductFiltersResult } from "../types";
 import { filterProducts } from "../utils/filter-products";
 import Link from "next/link";
 import {addLine} from "../hooks/use-cart";
+import {set} from "zod";
 
 type Props = {
   categories: ProductsCategoryData[];
@@ -14,9 +15,31 @@ type Props = {
 };
 
 const ProductList: FC<Props> = memo(function ({ categories, showFilters = false }) {
+
   const [filters, setFilters] = useState<ProductFiltersResult | undefined>();
   const filteredCategories = useMemo(() => filterProducts(categories, filters), [filters, categories]);
+    const [filtredCategory, setFiltredCategory] = useState()
+    const params = new URLSearchParams();
+    useEffect(()=>{
 
+
+if(filters!==undefined) {
+    filters.categoriesSlugs.forEach((cat) => params.append("cat", cat));
+    params.set("search", filters.search?undefined:filters.search="");
+    console.log(filters.search)
+}
+
+
+
+
+        fetch(`/api/product-filters?${params.toString()}`)
+            .then(r => r.json ())
+            .then(filteredCategories => {console.log(filteredCategories);}
+
+            )
+
+
+    })
   return (
     <div className="flex flex-row gap-8">
       {/* Filters */}
