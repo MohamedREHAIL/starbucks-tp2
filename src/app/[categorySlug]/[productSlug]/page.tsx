@@ -1,4 +1,4 @@
-"use client"
+
 import {
   BreadCrumbs,
   Button,
@@ -17,13 +17,39 @@ import {
   ProductAttributesTable,
 } from "../../../components/product-attributes-table";
 import {addLine} from "../../../hooks/use-cart";
-const product = {
-  ...PRODUCTS_CATEGORY_DATA[0].products[0],
-  category: {
-    ...PRODUCTS_CATEGORY_DATA[0],
-    products: PRODUCTS_CATEGORY_DATA[0].products.slice(1),
-  },
-};
+import prisma from "../../../utils/prisma";
+import {cache} from "react";
+import {AddToCartButton} from "../../../components/add-to-cart-button";
+// const product = {
+//   ...PRODUCTS_CATEGORY_DATA[0].products[0],
+//   category: {
+//     ...PRODUCTS_CATEGORY_DATA[0],
+//     products: PRODUCTS_CATEGORY_DATA[0].products.slice(1),
+//   },
+// };
+
+
+export const getCategoryProduct = cache(async (slugCate: string, slugProduct: string) => {
+  console.log("getCategoryProduct");
+  const product = await prisma.product.findUnique({
+    where: {
+      slug: slugProduct
+    },
+    include: {
+      category: {
+        include:{
+          products:{
+            where:{
+              slug: {not:slugCate}
+            }
+          }
+        }
+      }
+    }
+  });
+  console.log(product)
+  return product;
+});
 
 type Props = {
   categorySlug: string;
@@ -34,11 +60,13 @@ export async function generateMetadata({
   params,
   searchParams,
 }: NextPageProps<Props>): Promise<Metadata> {
+  const result = await getCategoryProduct(params.categorySlug, params.productSlug);
+
   return {
-    title: product.name,
+    title: result.name,
     description:
-      product.desc ??
-      `Succombez pour notre ${product.name} et commandez-le sur notre site !`,
+      result.desc ??
+      `Succombez pour notre ${result.name} et commandez-le sur notre site !`,
   };
 }
 
@@ -51,6 +79,8 @@ const productAttributes: ProductAttribute[] = [
 ];
 
 export default async function ProductPage({ params }: NextPageProps<Props>) {
+  const result = await getCategoryProduct(params.categorySlug, params.productSlug);
+  console.log(result)
   return (
     <SectionContainer wrapperClassName="max-w-5xl">
       <BreadCrumbs
@@ -61,12 +91,12 @@ export default async function ProductPage({ params }: NextPageProps<Props>) {
             url: "/",
           },
           {
-            label: product.category.name,
-            url: `/${product.category.slug}`,
+            label: result.category.name,
+            url: `/${result.category.slug}`,
           },
           {
-            label: product.name,
-            url: `/${product.path}`,
+            label: result.name,
+            url: `/${result.path}`,
           },
         ]}
       />
@@ -76,7 +106,7 @@ export default async function ProductPage({ params }: NextPageProps<Props>) {
         {/* Product Image */}
         <div className="relative">
           <ProductImage
-            {...product}
+            {...result}
             priority
             className="rounded-lg sticky top-12 object-cover sm:aspect-video md:aspect-auto w-full md:w-[300px]"
           />
@@ -86,20 +116,20 @@ export default async function ProductPage({ params }: NextPageProps<Props>) {
         <div className="flex-1">
           <div className="prose prose-lg">
             {/* Product Name */}
-            <h1>{product.name}</h1>
+            <h1>{result.name}</h1>
 
             {/* Product Rating */}
             <ProductRating value={4} size={18} />
 
             {/* Desc */}
-            <p>{product.desc}</p>
+            <p>{result.desc}</p>
 
             {/* Prix et ajout au panier */}
             <div className="flex justify-between items-center gap-8">
               <p className="!my-0 text-xl">
-                <FormattedPrice price={product.price} />
+                {result.price}
               </p>
-              <Button onClick={()=>addLine(product)} variant={"primary"}>Ajouter au panier</Button>
+              <AddToCartButton variant={"primary"} product={result} fullWidth={false} />
             </div>
           </div>
 
@@ -115,12 +145,12 @@ export default async function ProductPage({ params }: NextPageProps<Props>) {
             <h2>Vous aimerez aussi</h2>
           </div>
 
-          <ProductGridLayout products={product.category.products}>
+          <ProductGridLayout products={result.category.products}>
             {(product) => (
               <ProductCardLayout
                 product={product}
                 button={
-                  <Button onClick={()=>addLine(product)} variant="ghost" className="flex-1 !py-4">
+                  <Button variant="ghost" className="flex-1 !py-4">
                     Ajouter au panier
                   </Button>
                 }
