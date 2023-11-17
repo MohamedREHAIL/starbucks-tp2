@@ -17,15 +17,15 @@ type Props = {
 const ProductList: FC<Props> = memo(function ({ categories, showFilters = false }) {
 
   const [filters, setFilters] = useState<ProductFiltersResult | undefined>();
-  const filteredCategories = useMemo(() => filterProducts(categories, filters), [filters, categories]);
-    const [filtredCategory, setFiltredCategory] = useState()
+ //const filteredCategories = useMemo(() => filterProducts(categories, filters), [filters, categories]);
+    const [filtredCategory, setFiltredCategory] = useState(categories)
     const params = new URLSearchParams();
     useEffect(()=>{
 
 
 if(filters!==undefined) {
     filters.categoriesSlugs.forEach((cat) => params.append("cat", cat));
-    params.set("search", filters.search?undefined:filters.search="");
+    params.set("search", filters.search==undefined?filters.search="":filters.search);
     console.log(filters.search)
 }
 
@@ -34,22 +34,26 @@ if(filters!==undefined) {
 
         fetch(`/api/product-filters?${params.toString()}`)
             .then(r => r.json ())
-            .then(filteredCategories => {console.log(filteredCategories);}
+            .then(filteredCategories => {setFiltredCategory(filteredCategories.categories);}
 
             )
 
 
     })
   return (
+
     <div className="flex flex-row gap-8">
       {/* Filters */}
+
+
       {showFilters && <div className="w-full max-w-[270px]">
         <ProductFilters categories={categories} onChange={setFilters} />
       </div>}
 
       {/* Grille Produit */}
       <div className="flex-1 space-y-24">
-        {filteredCategories.map((cat) => (
+
+        {filtredCategory.map((cat) => (
           <section key={cat.id}>
             <h2 className="text-lg font-semibold mb-8 tracking-tight">
               <Link href={`/${cat.slug}`} className="link">{cat.name} ({cat.products.length})</Link>
