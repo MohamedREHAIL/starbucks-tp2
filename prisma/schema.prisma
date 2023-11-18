@@ -10,23 +10,48 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model ProductCategory{
-id    Int     @id @default(autoincrement())
-slug  String  @unique
-name  String
-products Product[]
+model ProductCategory {
+  id       Int       @id @default(autoincrement())
+  slug     String    @unique
+  name     String
+  products Product[]
 }
 
-model Product{
-id    Int     @id @default(autoincrement())
-slug  String  @unique
-path  String  @unique
-name  String
-desc  String?
-img   String
-price Float
-category ProductCategory   @relation(fields: [ProductCategoryId], references: [id], onDelete: Cascade)
-ProductCategoryId Int
+model Product {
+  id                Int             @id @default(autoincrement())
+  slug              String          @unique
+  path              String          @unique
+  name              String
+  desc              String?
+  img               String
+  price             Float
+  category          ProductCategory @relation(fields: [ProductCategoryId], references: [id], onDelete: Cascade)
+  ProductCategoryId Int
+  OrderLine         OrderLine[]
+}
 
+enum OrdreStatusEnum {
+  IN_PROGRESS
+  COMPLETED
+}
 
+model Order {
+  id          Int             @id @default(autoincrement())
+  createdAt   DateTime        @default(now())
+  completedAt DateTime?
+  status      OrdreStatusEnum @default(IN_PROGRESS)
+  lines       OrderLine[]
+  total       Float
+}
+
+model OrderLine {
+  id        Int     @id @default(autoincrement())
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+  qty       Int     @default(1)
+  subtotal  Float
+  orderId   Int
+  productId Int
+
+  @@unique([orderId, productId], name: "order_product_unique")
 }
