@@ -1,5 +1,5 @@
-/** @type {{images: {remotePatterns: [{protocol: string, hostname: string}]}, experimental: {serverComponents: boolean}}} */
-const nextConfig = {
+/** @type {import('next').NextConfig} */
+module.exports = {
   images: {
     remotePatterns: [
       {
@@ -8,9 +8,5 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    serverComponents: true,
-  },
-};
 
-module.exports = nextConfig;
+};
