@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+/** @type {{images: {remotePatterns: [{protocol: string, hostname: string}]}, experimental: {serverComponents: boolean}}} */
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -7,7 +7,10 @@ const nextConfig = {
         hostname: 'www.starbucks.fr',
       },
     ],
-  }
-}
+  },
+  experimental: {
+    serverComponents: true,
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -5,12 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7501c68-6cdf-41e4-9cab-369f9c2e5a65" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/actions/create-orders.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cart.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -64,7 +74,7 @@
       <workItem from="1698236397128" duration="6505000" />
       <workItem from="1699964574756" duration="14500000" />
       <workItem from="1700260011125" duration="1752000" />
-      <workItem from="1700318300206" duration="346000" />
+      <workItem from="1700318300206" duration="10489000" />
     </task>
     <servers />
   </component>

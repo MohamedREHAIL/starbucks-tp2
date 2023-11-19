@@ -1,18 +1,28 @@
+"use client"
 import {computeCartTotal, removeLine, updateLine, useStore} from "../hooks/use-cart";
 import {Button, Card} from "tp-kit/components";
 import {ProductCartLine} from "tp-kit/components/products";
 import {useEffect} from "react";
 import {CartCounter} from "./cart-counter";
+import {createOrder} from "../actions/create-orders";
 
 
 export function Cart(){
 
     const lines = useStore((state) => state.lines)
 
+    const HandleCommander=async ()=>{
+        const cartData = {
+            lines: lines.map((product) => ({ product: product.product, qty: product.qty })),
+        };
 
+         await createOrder(cartData);
+    }
     useEffect(() => {
         console.log(lines);
     }, [lines]);
+
+
 
     return(<>
 
@@ -30,7 +40,7 @@ export function Cart(){
                     <h3>Total</h3>
                     <div>{computeCartTotal(lines.map(p=>p))}</div>
                 </div>
-                <Button variant={"primary"} fullWidth>Commander</Button>
+                <Button onClick={HandleCommander} variant={"primary"} fullWidth>Commander</Button>
                 <Button variant={"outline"} fullWidth>Vider le panier</Button>
 
 
